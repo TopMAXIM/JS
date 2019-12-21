@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title> 카드 게임 </title>
+    <script src="jquery-3.4.1.js" charset="utf-8"></script>
+    <script src="jquery-ui.js"></script>
     <style media="screen">
-      
+      .layer_popup{
+        position: absolute;left: 50px; top: 50px;
+        cursor:move;
+      }
     </style>
+
     <script type="text/javascript">
-      
+
     </script>
   </head>
   <body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
   </body>
 </html>
