@@ -7,20 +7,63 @@
     <script src="jquery-ui.js"></script>
     <style media="screen">
       .layer_popup{
-        position: absolute;left: 50px; top: 50px;
+        position: absolute;left: 500px; top: 500px;
         cursor:move;
       }
+      .gType {
+
+      }
+
+
+      div {
+        width: 100px;
+        height: 100px;
+        padding: 15px;
+        margin: 15px;
+        text-align: center;
+        line-height: 100px;
+        font-size: 20px;
+        border: 1px solid black;
+      }
+
     </style>
-
     <script type="text/javascript">
-
+      $(function() {
+        $(".layer_popup").draggable(); // 드래그 테이블 설정
+      })
     </script>
   </head>
   <body>
-    <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
+    <div> <p class="gType" id="No.1">의류</p> </div>
+    <div> <p class="gType" id="No.2">사람</p> </div>
+    <div> <p class="gType" id="No.3">음식</p> </div>
+    <div> <p class="gType" id="No.4">게임</p> </div>
+
+    <div class="layer_popup">
+      <img src="images/cloth1.jpg" width="400" height="300" alt="의류1">
+      <img src="images/cloth2.jpg" width="400" height="300" alt="의류2">
+      <img src="images/cloth3.jpg" width="400" height="300" alt="의류3">
+      <img src="images/cloth4.jpg" width="400" height="300" alt="의류4">
+      <img src="images/cloth5.jpg" width="400" height="300" alt="의류5">
+
+      <img src="images/people1.jpg" width="400" height="300" alt="사람1">
+      <img src="images/people2.jpg" width="400" height="300" alt="사람2">
+      <img src="images/people3.jpg" width="400" height="300" alt="사람3">
+      <img src="images/people4.jpg" width="400" height="300" alt="사람4">
+      <img src="images/people5.jpg" width="400" height="300" alt="사람5">
+
+      <img src="images/food1.jpg" width="400" height="300" alt="음식1">
+      <img src="images/food2.jpg" width="400" height="300" alt="음식2">
+      <img src="images/food3.jpg" width="400" height="300" alt="음식3">
+      <img src="images/food4.jpg" width="400" height="300" alt="음식4">
+      <img src="images/food5.jpg" width="400" height="300" alt="음식5">
+
+      <img src="images/game1.jpg" width="400" height="300" alt="게임1">
+      <img src="images/game2.jpg" width="400" height="300" alt="게임2">
+      <img src="images/game3.jpg" width="400" height="300" alt="게임3">
+      <img src="images/game4.jpg" width="400" height="300" alt="게임4">
+      <img src="images/game5.jpg" width="400" height="300" alt="게임5">
+
+    </div>
   </body>
 </html>
