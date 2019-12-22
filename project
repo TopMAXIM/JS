@@ -6,13 +6,16 @@
     <script src="jquery-3.4.1.js" charset="utf-8"></script>
     <script src="jquery-ui.js"></script>
     <style media="screen">
+
       body {
          background-color:aquamarine;
       }
+
       ul{
         list-style: none;
         text-align: center;
       }
+
       li {
         list-style: none;
         display:inline-block;
@@ -21,6 +24,7 @@
       #gameBox {
         width: auto;
         height: auto;
+        position: relative;
       }
 
       #gameBox>li {
@@ -48,72 +52,81 @@
 
     </style>
     <script type="text/javascript">
+
+    //1. 재료 준비
       var cardNumber;
       var dragCard;
-      let json = {
-          "menu": [
-              {"의류": ["반바지", "카라티", "원피스", "롱코트", "플리스"]},
-              {"사람": ["백종원", "시진핑", "트럼프", "김정일", "푸-틴"]},
-              {"음식": ["광어회", "초밥", "삼각김밥", "치킨", "라면"]},
-              {"게임": ["Rainbow6", "유로트럭", "Arma3", "GTA5", "테탑시"]}
-          ]
-        }
+      let move=false;
+      let count=0;
+      let eqcount=0;
+      let AnswerCount=20;
+      let cardGame = {
+        "의류": ["반바지", "카라티", "원피스", "롱코트", "플리스"],
+        "사람": ["백종원", "시진핑", "트럼프", "김정일", "푸-틴"],
+        "음식": ["광어회", "초밥", "삼각김밥", "치킨", "라면"],
+        "게임": ["Rainbow6", "유로트럭", "Arma3", "GTA5", "테탑시"]
+      }
 
-        let move=false;
-        let count=0;
-        let AnswerCount=20;
-
+        //2. 게임 생성
         $(document).ready(function() {
-            for (var i in json['menu']) {
+            for (var i in cardGame) {
               //console.log(i);
-                for (var j in json['menu'][i]) {
-                  //console.log(j);
-                    $('#gameBox>li').eq(i).text(j);
-                    for (var k in json['menu'][i][j]) {
-                        //console.log(k);
-                        $('body').append(`<div class="card">${json['menu'][i][j][k]}<img src="images/${json['menu'][i][j][k]}.jpg" width="60" hight="80"></div>`);
+
+              //3. 게임박스에 분류 생성
+              $('#gameBox>li').eq(eqcount).text(i);
+              eqcount++;
+
+              //4. 키 밸류만큼 카드 생성
+              for (var j in cardGame[i]) {
+                $('body').append(`<div class="card">${cardGame[i][j]}<img src="images/${cardGame[i][j]}.jpg" width="60" hight="80"></div>`);
+                //console.log(j);
+              }
+
+              //5.이벤트 설정
+              $('#gameBox>li').droppable({
+                drop: function(event, ui) {
+                  var categori=$(this).text() // 분류 4개 (의류, 사람, 음식, 게임)
+                  for(var o in cardGame[categori]){
+                    if(cardGame[categori][o]==dragCard){
+                      //배열 menu의 카드 n번이 == 드래그 카드와 같다면
+                      $('.card').eq(cardNumber-1).hide(500);
+                      move=true;
+                      count++;
+                      break;
+                    }else{
+                      move=false;
                     }
+                    // console.log("--------------------");
+                    // console.log("cardNumber : " + cardNumber);
+                    // console.log("categori(분류) : " + categori);
+                    // console.log("dragCard(카드) : " + dragCard);
+                    // console.log("cardGame[categori][o](분류종류) : " + cardGame[categori][o]);
+                    // console.log("cardGame[categori][o](카드비교) : " + cardGame[categori][o]);
+                    // console.log("=====================");
+                    // console.log("");
+                  }
 
-                    $('#gameBox>li').droppable({
-                        drop: function(event, ui) {
-                            var categori=$(this).text() // 분류 4개 (의류, 사람, 음식, 게임)
-                            for(var o in json['menu']){
-                                for(var p in json['menu'][o][categori]){
-                                    if(json['menu'][o][categori][p]==dragCard){
-                                    //배열 menu의 카드 n번이 == 드래그 카드와 같다면
-                                        $('.card').eq(cardNumber-1).hide(500);
-                                        move=true;
-                                        count++;
-                                        break;
-                                    }else{
-                                        move=false;
-                                    }
-
-                                    console.log("--------------------");
-                                    console.log("cardNumber : " + cardNumber);
-                                    console.log("categori(분류) : " + categori);
-                                    console.log("dragCard(카드) : " + dragCard);
-                                    console.log("json['menu'][o][categori](분류종류) : " + json['menu'][o][categori]);
-                                    console.log("json['menu'][o][categori][p](카드비교) : " + json['menu'][o][categori][p]);
-                                    console.log("=====================");
-                                    console.log("");
-                                }
-                            }
-                            if(!move){
-                                $('.card').draggable({ revert:true });
-                            }
-                            if(count==AnswerCount){
-                                alert('정답')
-                            }
-                        }
+                  // move = false
+                  if(!move){
+                    $('.card').draggable({
+                      revert:true
                     });
+                  }
+
+                  // 카드를 전부 맞추면 메시지 출력
+                  if(count==AnswerCount){
+                    alert('모두 맞췄습니다.')
+                  }
                 }
+              });
             }
+
             $('.card').draggable();
             $('.card').mousedown(function() {
-                cardNumber=$(this).index();
-                dragCard=$(this).text(); })
-        })
+              cardNumber=$(this).index();
+              dragCard=$(this).text();
+          })
+      })
     </script>
   </head>
   <body>
